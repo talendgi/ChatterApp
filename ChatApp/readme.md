@@ -119,9 +119,3 @@ Future SignalR:
 ### Demo video
 
 https://drive.google.com/file/d/1c6bSHoxt64Kwk3dYJ6whbnULJ0svEzUT/view?usp=drive_link
-9. Add structured logging in services/repositories.
-10. Design offline-first: local write first, sync later strategy.
-11. Keep navigation behind `INavigationService` for testability.
-12. Add unit tests for ViewModels and Services (mock repositories/services).
-
-If you want, next I can turn this into a concrete project scaffold checklist (file-by-file creation order) before coding.
