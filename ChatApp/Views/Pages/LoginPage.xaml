@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:ChatApp.ViewModels"
+    x:DataType="viewmodels:LoginViewModel"
+    Title="Login">
+
+    <Grid Padding="24">
+        <VerticalStackLayout Spacing="12" VerticalOptions="Center">
+            <Label Text="ChatterBox" FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            <Label Text="Login with mobile number" HorizontalTextAlignment="Center" TextColor="#667781" />
+            <Entry Placeholder="Mobile number" Keyboard="Telephone" Text="{Binding PhoneNumber}" />
+            <Button Text="Continue" Command="{Binding ContinueCommand}" BackgroundColor="#25D366" TextColor="White" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

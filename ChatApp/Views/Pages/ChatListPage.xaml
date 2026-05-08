@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Name="ChatListRoot"
+    x:Class="ChatApp.Views.Pages.ChatListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:ChatApp.Models"
+    xmlns:viewmodels="clr-namespace:ChatApp.ViewModels"
+    x:DataType="viewmodels:ChatListViewModel"
+    Title="ChatterBox">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Command="{Binding OpenNewChatCommand}" Priority="0" Order="Primary" />
+        <ToolbarItem Text="Settings" Command="{Binding OpenSettingsCommand}" Priority="1" Order="Primary" />
+    </ContentPage.ToolbarItems>
+
+    <Grid Padding="0" RowDefinitions="Auto,*">
+        <Grid BackgroundColor="#075E54" Padding="16,12">
+            <Label Text="ChatterBox" FontSize="22" TextColor="White" FontAttributes="Bold" />
+        </Grid>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto,*">
+            <SearchBar Placeholder="Search chats" Margin="12,4" Text="{Binding SearchText}" />
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Chats}" SelectionMode="None" Margin="0,4,0,0">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="24" Spacing="8">
+                    <Label Text="No chats yet" FontSize="18" HorizontalTextAlignment="Center" />
+                    <Label Text="Chats will appear here after you send or receive messages." FontSize="13" HorizontalTextAlignment="Center" TextColor="#667781" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ChatThread">
+                    <Grid Padding="14,10" ColumnDefinitions="52,*,Auto">
+                        <Border Grid.Column="0" BackgroundColor="#25D366" StrokeThickness="0" StrokeShape="RoundRectangle 26">
+                            <Label Text="{Binding AvatarInitial}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontAttributes="Bold" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1" Padding="12,0,0,0" Spacing="2">
+                            <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                            <Label Text="{Binding LastMessagePreview}" FontSize="13" TextColor="#667781" LineBreakMode="TailTruncation" />
+                        </VerticalStackLayout>
+
+                        <Label Grid.Column="2" Text="{Binding UpdatedAt, StringFormat='{0:hh:mm tt}'}" FontSize="12" TextColor="#667781" VerticalTextAlignment="Start" />
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference ChatListRoot}, Path=BindingContext.OpenChatCommand}" CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>

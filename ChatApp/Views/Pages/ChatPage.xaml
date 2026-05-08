@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Pages.ChatPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:ChatApp.Models"
+    xmlns:viewmodels="clr-namespace:ChatApp.ViewModels"
+    x:DataType="viewmodels:ChatDetailViewModel"
+    BackgroundColor="#0B141A"
+    Title="Chat">
+
+    <Grid RowDefinitions="*,Auto" RowSpacing="0">
+
+        <CollectionView
+            Grid.Row="0"
+            ItemsSource="{Binding Messages}"
+            SelectionMode="None"
+            Margin="0,8,0,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ChatMessage">
+                    <Grid Padding="12,0" ColumnDefinitions="*">
+                        <Border
+                            x:Name="Bubble"
+                            HorizontalOptions="Start"
+                            StrokeShape="RoundRectangle 18"
+                            BackgroundColor="#202C33"
+                            Padding="12,8"
+                            MaximumWidthRequest="320">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="{Binding Text}"
+                                    TextColor="#E9EDEF"
+                                    FontSize="15"
+                                    LineBreakMode="WordWrap" />
+                                <Label
+                                    Text="{Binding SentAt, StringFormat='{0:hh:mm tt}'}"
+                                    TextColor="#8B9AA5"
+                                    FontSize="11"
+                                    HorizontalTextAlignment="End" />
+                            </VerticalStackLayout>
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsOutgoing}" Value="True">
+                                    <Setter Property="HorizontalOptions" Value="End" />
+                                    <Setter Property="BackgroundColor" Value="#005C4B" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Border
+            Grid.Row="1"
+            BackgroundColor="#111B21"
+            Stroke="#1F2C34"
+            StrokeThickness="1"
+            Padding="10,8"
+            Margin="0"
+            StrokeShape="RoundRectangle 0">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Border
+                    Grid.Column="0"
+                    BackgroundColor="#202C33"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22"
+                    Padding="14,4"
+                    MinimumHeightRequest="44">
+                    <Entry
+                        Text="{Binding MessageText}"
+                        Placeholder="Type a message"
+                        PlaceholderColor="#7D8B95"
+                        TextColor="#E9EDEF"
+                        BackgroundColor="Transparent"
+                        ReturnType="Send"
+                        ClearButtonVisibility="WhileEditing" />
+                </Border>
+
+                <Button
+                    Grid.Column="1"
+                    Text="Send"
+                    Command="{Binding SendCommand}"
+                    BackgroundColor="#00A884"
+                    TextColor="White"
+                    CornerRadius="22"
+                    Padding="18,10"
+                    FontAttributes="Bold"
+                    MinimumHeightRequest="44" />
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

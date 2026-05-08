@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Name="ChatDetailRoot"
+    x:Class="ChatApp.Views.Pages.ChatDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:ChatApp.Models"
+    xmlns:viewmodels="clr-namespace:ChatApp.ViewModels"
+    x:DataType="viewmodels:ChatDetailViewModel"
+    Title="Chat">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Select" Command="{Binding ToggleSelectionModeCommand}" />
+        <ToolbarItem Text="Delete Sel" Command="{Binding DeleteSelectedCommand}" />
+        <ToolbarItem Text="Clear Chat" Command="{Binding DeleteHistoryCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid Padding="12" RowDefinitions="*,Auto" RowSpacing="8" BackgroundColor="#ECE5DD">
+        <Image Source="{Binding ChatBackgroundPath}" Aspect="AspectFill" Opacity="0.22" />
+        <CollectionView ItemsSource="{Binding Messages}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ChatMessage">
+                    <Grid Padding="0,4" ColumnDefinitions="*,*">
+                        <Border Grid.Column="1" BackgroundColor="#DCF8C6" StrokeThickness="0" Padding="10,7" MaximumWidthRequest="280">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Text}" LineBreakMode="WordWrap" />
+                                <HorizontalStackLayout Spacing="4" HorizontalOptions="End">
+                                    <Label Text="{Binding SentAt, StringFormat='{0:hh:mm tt}'}" FontSize="10" TextColor="#667781" />
+                                    <Label Text="{Binding DeliveryTick}" FontSize="10" TextColor="#667781" IsVisible="{Binding IsOutgoing}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsOutgoing}" Value="False">
+                                    <Setter Property="Grid.Column" Value="0" />
+                                    <Setter Property="BackgroundColor" Value="White" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="StrokeThickness" Value="2" />
+                                    <Setter Property="Stroke" Value="#34B7F1" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference ChatDetailRoot}, Path=BindingContext.MessageOptionsCommand}" CommandParameter="{Binding .}" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8" Padding="0,6,0,0">
+            <Button Grid.Column="0" Text="+" Command="{Binding AddAttachmentCommand}" CornerRadius="18" WidthRequest="36" HeightRequest="36" />
+            <Border Grid.Column="1" BackgroundColor="White" Stroke="#D9D9D9" StrokeShape="RoundRectangle 20" Padding="12,4">
+                <Entry Placeholder="Type a message" Text="{Binding MessageText}" />
+            </Border>
+            <Button Grid.Column="2" Text="Send" Command="{Binding SendCommand}" BackgroundColor="#25D366" TextColor="White" CornerRadius="20" Padding="16,10" />
+            <Button Grid.Column="3" Text="{Binding RecordButtonText}" Command="{Binding RecordAudioCommand}" BackgroundColor="#34B7F1" TextColor="White" CornerRadius="20" Padding="12,10" />
+        </Grid>
+    </Grid>
+</ContentPage>

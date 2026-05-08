@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:ChatApp.ViewModels"
+    x:DataType="viewmodels:SettingsViewModel"
+    Title="Settings">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="18" Spacing="10">
+            <Label Text="Profile" FontSize="22" FontAttributes="Bold" />
+            <Label Text="Profile photo path" FontAttributes="Bold" />
+            <Label Text="{Binding ProfilePhotoPath}" LineBreakMode="CharacterWrap" TextColor="#667781" />
+            <Image Source="{Binding ProfilePhotoPath}" HeightRequest="84" WidthRequest="84" Aspect="AspectFill" />
+            <Button Text="Choose Profile Photo" Command="{Binding PickProfilePhotoCommand}" />
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="Avatar Green" Command="{Binding SetSampleAvatarCommand}" CommandParameter="avatar_green.svg" />
+                <Button Text="Avatar Blue" Command="{Binding SetSampleAvatarCommand}" CommandParameter="avatar_blue.svg" />
+            </HorizontalStackLayout>
+
+            <Label Text="Chat background path" FontAttributes="Bold" Margin="0,8,0,0" />
+            <Label Text="{Binding ChatBackgroundPath}" LineBreakMode="CharacterWrap" TextColor="#667781" />
+            <Image Source="{Binding ChatBackgroundPath}" HeightRequest="120" Aspect="AspectFill" />
+            <Button Text="Choose Chat Background" Command="{Binding PickBackgroundCommand}" />
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="Bubbles" Command="{Binding SetSampleBackgroundCommand}" CommandParameter="bg_bubbles.svg" />
+                <Button Text="Waves" Command="{Binding SetSampleBackgroundCommand}" CommandParameter="bg_waves.svg" />
+            </HorizontalStackLayout>
+
+            <Button Text="Logout" Command="{Binding LogoutCommand}" BackgroundColor="#EF4444" TextColor="White" Margin="0,20,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

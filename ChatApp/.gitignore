@@ -1,0 +1,15 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build folders
+bin/
+obj/
+
+# MAUI Android
+Platforms/Android/.gradle/
+Platforms/Android/build/
+
+# Logs
+*.log

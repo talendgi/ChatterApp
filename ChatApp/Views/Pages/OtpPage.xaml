@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Pages.OtpPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:ChatApp.ViewModels"
+    x:DataType="viewmodels:OtpViewModel"
+    Title="Verify OTP">
+
+    <Grid Padding="24">
+        <VerticalStackLayout Spacing="12" VerticalOptions="Center">
+            <Label Text="Enter OTP" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            <Label Text="Demo OTP: 123456" HorizontalTextAlignment="Center" TextColor="#667781" />
+            <Entry Placeholder="Display name" Text="{Binding DisplayName}" />
+            <Entry Placeholder="OTP code" Keyboard="Numeric" Text="{Binding OtpCode}" />
+            <Button Text="Verify" Command="{Binding VerifyCommand}" BackgroundColor="#25D366" TextColor="White" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

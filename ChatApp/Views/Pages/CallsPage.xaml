@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChatApp.Views.Pages.CallsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Calls">
+
+    <Grid Padding="24" BackgroundColor="#F7F8FA">
+        <VerticalStackLayout Spacing="12" VerticalOptions="Center">
+            <Label Text="Calls" FontSize="28" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+            <Label Text="Coming soon: voice and video call history." FontSize="15" TextColor="#667781" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
