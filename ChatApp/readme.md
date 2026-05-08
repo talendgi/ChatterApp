@@ -116,7 +116,9 @@ Future SignalR:
 - **Entities**: SQLite storage shape and constraints.
 - **Mapping**: Convert between Entity <-> Model <-> DTO cleanly.
 
-8. Use DI registration per layer in `MauiProgram`.
+### Demo video
+
+https://drive.google.com/file/d/1c6bSHoxt64Kwk3dYJ6whbnULJ0svEzUT/view?usp=drive_link
 9. Add structured logging in services/repositories.
 10. Design offline-first: local write first, sync later strategy.
 11. Keep navigation behind `INavigationService` for testability.
