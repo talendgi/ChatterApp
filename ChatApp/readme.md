@@ -1,4 +1,4 @@
-
+## .NET MAUI based chat application designed for scalable real-time messaging and modern UI experiences.
 ## Folder Structure
 
 ```text
